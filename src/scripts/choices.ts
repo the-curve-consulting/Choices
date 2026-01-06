@@ -466,6 +466,7 @@ class Choices {
 
       if (!preventInputFocus && this._canSearch) {
         this.input.focus();
+        this.containerInner.focus();
       }
 
       this.passedElement.triggerEvent(EVENTS.showDropdown, {});
@@ -1072,6 +1073,7 @@ class Choices {
     // Focus input as without focus, a user cannot do anything with a
     // highlighted item
     this.input.focus();
+    this.containerInner.focus();
   }
 
   _handleChoiceAction(activeItems?: Item[], element?: HTMLElement): void {
@@ -1661,6 +1663,7 @@ class Choices {
       if (containerWasExactTarget) {
         if (this._isTextElement) {
           this.input.focus();
+          this.containerInner.focus();
         } else if (this._isSelectMultipleElement) {
           this.showDropdown();
         }
@@ -1737,6 +1740,7 @@ class Choices {
         if (this._isTextElement) {
           if (document.activeElement !== this.input.element) {
             this.input.focus();
+            this.containerInner.focus();
           }
         } else {
           this.showDropdown();
@@ -1757,6 +1761,7 @@ class Choices {
       }
 
       this.containerOuter.removeFocusState();
+      this.containerInner.removeInnerFocusState();
       this.hideDropdown(true);
     }
   }
@@ -1772,10 +1777,12 @@ class Choices {
     const focusActions = {
       [TEXT_TYPE]: (): void => {
         if (target === this.input.element) {
+          this.containerInner.addInnerFocusState();
           this.containerOuter.addFocusState();
         }
       },
       [SELECT_ONE_TYPE]: (): void => {
+        this.containerInner.addInnerFocusState();
         this.containerOuter.addFocusState();
         if (target === this.input.element) {
           this.showDropdown(true);
@@ -1783,6 +1790,7 @@ class Choices {
       },
       [SELECT_MULTIPLE_TYPE]: (): void => {
         if (target === this.input.element) {
+          this.containerInner.addInnerFocusState();
           this.showDropdown(true);
           // If element is a select box, the focused element is the container and the dropdown
           // isn't already open, focus and show dropdown
@@ -1805,6 +1813,7 @@ class Choices {
         [TEXT_TYPE]: (): void => {
           if (target === this.input.element) {
             this.containerOuter.removeFocusState();
+            this.containerInner.removeInnerFocusState();
             if (hasHighlightedItems) {
               this.unhighlightAll();
             }
@@ -1813,6 +1822,7 @@ class Choices {
         },
         [SELECT_ONE_TYPE]: (): void => {
           this.containerOuter.removeFocusState();
+          this.containerInner.removeInnerFocusState();
           if (
             target === this.input.element ||
             (target === this.containerOuter.element && !this._canSearch)
@@ -1823,6 +1833,7 @@ class Choices {
         [SELECT_MULTIPLE_TYPE]: (): void => {
           if (target === this.input.element) {
             this.containerOuter.removeFocusState();
+            this.containerInner.removeInnerFocusState();
             this.hideDropdown(true);
             if (hasHighlightedItems) {
               this.unhighlightAll();
@@ -2257,8 +2268,6 @@ class Choices {
 
           const isSelected = shouldPreselect ? true : choice.selected;
           const isDisabled = choice.disabled;
-
-          console.log(isDisabled, choice);
 
           this._addChoice({
             value,

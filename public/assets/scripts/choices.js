@@ -1,4 +1,4 @@
-/*! choices.js v9.0.1 | © 2019 Josh Johnson | https://github.com/jshjohnson/Choices#readme */
+/*! @kishannareshpal/choices.js v9.0.1-5 | © 2026 Josh Johnson | https://github.com/kishannareshpal/Choices.js#readme */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -111,6 +111,7 @@ var utils_1 = __webpack_require__(1);
 exports.DEFAULT_CLASSNAMES = {
   containerOuter: 'choices',
   containerInner: 'choices__inner',
+  containerInnerFocusState: 'is-focused__containerInner',
   input: 'choices__input',
   inputCloned: 'choices__input--cloned',
   list: 'choices__list',
@@ -1760,6 +1761,8 @@ function () {
 
       if (!preventInputFocus && _this._canSearch) {
         _this.input.focus();
+
+        _this.containerInner.focus();
       }
 
       _this.passedElement.triggerEvent(constants_1.EVENTS.showDropdown, {});
@@ -2357,6 +2360,7 @@ function () {
     // highlighted item
 
     this.input.focus();
+    this.containerInner.focus();
   };
 
   Choices.prototype._handleChoiceAction = function (activeItems, element) {
@@ -2879,6 +2883,7 @@ function () {
       if (containerWasExactTarget) {
         if (this._isTextElement) {
           this.input.focus();
+          this.containerInner.focus();
         } else if (this._isSelectMultipleElement) {
           this.showDropdown();
         }
@@ -2955,6 +2960,7 @@ function () {
         if (this._isTextElement) {
           if (document.activeElement !== this.input.element) {
             this.input.focus();
+            this.containerInner.focus();
           }
         } else {
           this.showDropdown();
@@ -2971,6 +2977,7 @@ function () {
       }
 
       this.containerOuter.removeFocusState();
+      this.containerInner.removeInnerFocusState();
       this.hideDropdown(true);
     }
   };
@@ -2989,9 +2996,13 @@ function () {
 
     var focusActions = (_b = {}, _b[constants_1.TEXT_TYPE] = function () {
       if (target === _this.input.element) {
+        _this.containerInner.addInnerFocusState();
+
         _this.containerOuter.addFocusState();
       }
     }, _b[constants_1.SELECT_ONE_TYPE] = function () {
+      _this.containerInner.addInnerFocusState();
+
       _this.containerOuter.addFocusState();
 
       if (target === _this.input.element) {
@@ -2999,6 +3010,8 @@ function () {
       }
     }, _b[constants_1.SELECT_MULTIPLE_TYPE] = function () {
       if (target === _this.input.element) {
+        _this.containerInner.addInnerFocusState();
+
         _this.showDropdown(true); // If element is a select box, the focused element is the container and the dropdown
         // isn't already open, focus and show dropdown
 
@@ -3026,6 +3039,8 @@ function () {
         if (target === _this.input.element) {
           _this.containerOuter.removeFocusState();
 
+          _this.containerInner.removeInnerFocusState();
+
           if (hasHighlightedItems_1) {
             _this.unhighlightAll();
           }
@@ -3035,12 +3050,16 @@ function () {
       }, _b[constants_1.SELECT_ONE_TYPE] = function () {
         _this.containerOuter.removeFocusState();
 
+        _this.containerInner.removeInnerFocusState();
+
         if (target === _this.input.element || target === _this.containerOuter.element && !_this._canSearch) {
           _this.hideDropdown(true);
         }
       }, _b[constants_1.SELECT_MULTIPLE_TYPE] = function () {
         if (target === _this.input.element) {
           _this.containerOuter.removeFocusState();
+
+          _this.containerInner.removeInnerFocusState();
 
           _this.hideDropdown(true);
 
@@ -3459,7 +3478,6 @@ function () {
           var shouldPreselect = _this._isSelectOneElement && !hasSelectedChoice && index === firstEnabledChoiceIndex;
           var isSelected = shouldPreselect ? true : choice.selected;
           var isDisabled = choice.disabled;
-          console.log(isDisabled, choice);
 
           _this._addChoice({
             value: value,
@@ -3577,7 +3595,7 @@ function () {
   };
 
   Choices.prototype._generatePlaceholderValue = function () {
-    if (this._isSelectElement) {
+    if (this._isSelectElement && this.passedElement.placeholderOption) {
       var placeholderOption = this.passedElement.placeholderOption;
       return placeholderOption ? placeholderOption.text : null;
     }
@@ -4573,6 +4591,14 @@ function () {
     if (!this.isFocussed) {
       this.element.focus();
     }
+  };
+
+  Container.prototype.addInnerFocusState = function () {
+    this.element.classList.add(this.classNames.containerInnerFocusState);
+  };
+
+  Container.prototype.removeInnerFocusState = function () {
+    this.element.classList.remove(this.classNames.containerInnerFocusState);
   };
 
   Container.prototype.addFocusState = function () {

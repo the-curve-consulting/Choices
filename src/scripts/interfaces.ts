@@ -189,6 +189,8 @@ export interface ClassNames {
   containerOuter: string;
   /** @default 'choices__inner' */
   containerInner: string;
+  /** @default 'is-focused__containerInner' */
+  containerInnerFocusState: string;
   /** @default 'choices__input' */
   input: string;
   /** @default 'choices__input--cloned' */

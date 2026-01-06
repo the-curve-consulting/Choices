@@ -10,6 +10,7 @@ import {
 export const DEFAULT_CLASSNAMES: ClassNames = {
   containerOuter: 'choices',
   containerInner: 'choices__inner',
+  containerInnerFocusState: 'is-focused__containerInner',
   input: 'choices__input',
   inputCloned: 'choices__input--cloned',
   list: 'choices__list',

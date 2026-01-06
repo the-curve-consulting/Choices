@@ -1,6 +1,7 @@
 /*=============================================
 =            Generic styling                  =
 =============================================*/
+@use "sass:math";
 
 $global-guttering: 24px;
 $global-font-size-h1: 32px;
@@ -65,7 +66,7 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  margin-bottom: $global-guttering/2;
+  margin-bottom: math.div($global-guttering, 2);
   font-weight: 400;
   line-height: 1.2;
 }
@@ -152,7 +153,7 @@ label + p {
 
 .logo {
   display: block;
-  margin-bottom: $global-guttering/2;
+  margin-bottom: math.div($global-guttering, 2);
 }
 
 .logo__img {
@@ -161,7 +162,7 @@ label + p {
   display: inline-block;
   max-width: 100%;
   vertical-align: top;
-  padding: $global-guttering/4 0;
+  padding: math.div($global-guttering, 4) 0;
 }
 
 .visible-ie {

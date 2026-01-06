@@ -107,6 +107,14 @@ export default class Container {
     }
   }
 
+  addInnerFocusState(): void {
+    this.element.classList.add(this.classNames.containerInnerFocusState);
+  }
+
+  removeInnerFocusState(): void {
+    this.element.classList.remove(this.classNames.containerInnerFocusState);
+  }
+
   addFocusState(): void {
     this.element.classList.add(this.classNames.focusState);
   }
