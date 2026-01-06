@@ -1,4 +1,4 @@
-/*! @kishannareshpal/choices.js v9.0.1-4 | © 2021 Josh Johnson | https://github.com/kishannareshpal/Choices#readme */
+/*! @kishannareshpal/choices.js v9.0.1-5 | © 2026 Josh Johnson | https://github.com/kishannareshpal/Choices.js#readme */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
