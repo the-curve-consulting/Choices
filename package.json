@@ -1,6 +1,6 @@
 {
   "name": "@the-curve-consulting/choices.js",
-  "version": "9.0.1-5",
+  "version": "9.0.1-6",
   "description": "A vanilla JS customisable text input/select box plugin",
   "main": "./public/assets/scripts/choices.js",
   "types": "./types/index.d.ts",
