@@ -1,5 +1,5 @@
 {
-  "name": "@kishannareshpal/choices.js",
+  "name": "@the-curve-consulting/choices.js",
   "version": "9.0.1-5",
   "description": "A vanilla JS customisable text input/select box plugin",
   "main": "./public/assets/scripts/choices.js",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kishannareshpal/Choices.js.git"
+    "url": "git+https://github.com/@the-curve-consulting/Choices.git"
   },
   "author": "Josh Johnson",
   "license": "MIT",
@@ -41,9 +41,9 @@
     "types"
   ],
   "bugs": {
-    "url": "https://github.com/kishannareshpal/Choices.js/issues"
+    "url": "https://github.com/the-curve-consulting/Choices/issues"
   },
-  "homepage": "https://github.com/kishannareshpal/Choices.js#readme",
+  "homepage": "https://github.com/the-curve-consulting/Choices#readme",
   "keywords": [
     "customisable",
     "input",
@@ -104,7 +104,7 @@
     "fuse.js": "^3.4.6",
     "redux": "^4.0.4"
   },
-  "npmName": "@kishannareshpal/choices.js",
+  "npmName": "@the-curve-consulting/choices.js",
   "npmFileMap": [
     {
       "files": [
